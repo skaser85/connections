@@ -82,9 +82,6 @@ int main(int argc, char **argv)
 
     const char* program = nob_shift(argv, argc);
 
-    //nob_cmd_append(&cmd, "cc", "-ggdb", "-Wall", "-Wextra", "-o", BUILD_FOLDER"main", SRC_FOLDER"main.c");
-    //nob_cmd_append(&cmd, "-lraylib", "-lGL", "-lm", "-lpthread", "-ldl", "-lrt", "-lX11");
-
     if (argc > 0) {
         const char* param = nob_shift(argv, argc);
         if (strcmp(param, "run") == 0) {

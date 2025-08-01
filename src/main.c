@@ -63,12 +63,13 @@ int main() {
 
   size_t button_row_y = y + TILE_PADDING;
 
-  Rectangle submit_btn = { .x = SCREEN_WIDTH / 4, .y = button_row_y, .width = MeasureText("Submit", WORD_FONT_SIZE)*1.4, .height = WORD_FONT_SIZE * 1.4 };
-  Button submit = { .label = "Submit", .rect = submit_btn, .color = DARKGREEN, .hovered_color = LIME };
-
   size_t last_frame_selected_count = 0;
 
   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Connections");
+  
+  int sw = MeasureText("Submit", WORD_FONT_SIZE)*1.4;
+  Rectangle submit_btn = { .x = SCREEN_WIDTH / 4, .y = button_row_y, .width = sw, .height = WORD_FONT_SIZE * 1.4 };
+  Button submit = { .label = "Submit", .rect = submit_btn, .color = DARKGREEN, .hovered_color = LIME };
 
   while (!WindowShouldClose()) {
     BeginDrawing();
@@ -97,10 +98,14 @@ int main() {
 
     last_frame_selected_count = selected_count;
     
-    Color submit_color = CheckCollisionPointRec(m, submit.rect) ? submit.hovered_color : submit.color;
-    DrawRectangleRec(submit.rect, GREEN);
+    bool submit_hovered = CheckCollisionPointRec(m, submit.rect);  
+    Color submit_color = submit_hovered ? submit.hovered_color : submit.color;
+    DrawRectangleRec(submit.rect, submit_color);
     int tw = MeasureText(submit.label, WORD_FONT_SIZE);
     DrawText(submit.label, submit.rect.x+submit.rect.width/2-(tw/2), submit.rect.y+submit.rect.height/2-WORD_FONT_SIZE/2, WORD_FONT_SIZE, WHITE);
+    if (submit_hovered && clicked) {
+      
+    }
  
     EndDrawing();
   }
